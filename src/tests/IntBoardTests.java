@@ -12,10 +12,10 @@ import experiment.IntBoard;
 
 public class IntBoardTests  {
 	
-	public static IntBoard board;
+	private static IntBoard board;
 	
 	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
+	public static void setUp() throws Exception {
 		board = new IntBoard(4,4);
 	}
 
@@ -27,6 +27,15 @@ public class IntBoardTests  {
 		Set<BoardCell> testList = board.getAdjList(cell);
 		assertTrue(testList.contains(board.getCell(1, 0)));
 		assertTrue(testList.contains(board.getCell(0, 1)));
+		assertEquals(2, testList.size());
+	}
+	@Test
+	public void testAdjacency1() //Bottom right corner
+	{
+		BoardCell cell = board.getCell(3,3);
+		Set<BoardCell> testList = board.getAdjList(cell);
+		assertTrue(testList.contains(board.getCell(3, 2)));
+		assertTrue(testList.contains(board.getCell(2, 3)));
 		assertEquals(2, testList.size());
 	}
 

@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeSet;
+
 import experiment.BoardCell;
 
 public class IntBoard {
@@ -18,15 +20,15 @@ public class IntBoard {
 	public IntBoard(int x, int y)
 	{
 		adjMtx = new HashMap<>();
-		visited = new HashSet<>();
-		targets = new HashSet<>();
+		visited = new TreeSet<>();
+		targets = new TreeSet<>();
 		grid = new BoardCell[x][y];
 		boardRows = x;
 		boardCols = y;
 	}
 	public void calcAdjacencies()
 	{
-		Set<BoardCell> cellSet =  new HashSet<>();
+		Set<BoardCell> cellSet =  new TreeSet<>();
 		for(int i = 0; i < boardRows; i++)
 		{
 			for(int e = 0; e < boardCols; i++)
@@ -55,23 +57,40 @@ public class IntBoard {
 	public void calcTargets(BoardCell startCell, int pathLength)
 	{
 		visited.add(startCell);
+		calcAdjacencies();//might not need this later when we start coding.
 		findAllTargets(startCell, pathLength);
 	}
 	private void findAllTargets(BoardCell thisCell, int numSteps)
 	{
+		for(BoardCell c: adjMtx.get(thisCell))
+		{
+			if(!visited.contains(c))
+			{
+				visited.add(c);
+				if(numSteps == 1)
+				{
+					targets.add(c);
+				}
+				else
+				{
+					findAllTargets(c,numSteps-1);
+				}
+				visited.remove(c);
+			}
+		}
 		
 	}
 	public Set<BoardCell> getTargets()
 	{
 		Set<BoardCell> temp = new HashSet<BoardCell>();
 		
-		return null;
+		return temp;
 	}
 	public Set<BoardCell> getAdjList(BoardCell cell)
 	{
 		Set<BoardCell> temp = new HashSet<BoardCell>();
 		
-		return null;
+		return temp;
 	}
 	public BoardCell getCell(int i, int x) 
 	{
