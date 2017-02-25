@@ -5,6 +5,8 @@ public class BoardCell {
 	private int column;
 	public BoardCell()
 	{
+		row = 0;
+		column = 0;
 	}
 	public BoardCell(int i, int e)
 	{

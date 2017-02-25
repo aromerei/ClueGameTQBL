@@ -38,7 +38,7 @@ public class IntBoard {
 				{
 					cellSet.add(new BoardCell(i-1, e));
 				}
-				if(i + 1 < boardRows)
+				if(i + 1 != boardRows -1)
 				{
 					cellSet.add(new BoardCell(i+1, e));
 				}
@@ -46,7 +46,7 @@ public class IntBoard {
 				{
 					cellSet.add(new BoardCell(i, e-1));
 				}
-				if(e + 1 < boardCols)
+				if(e + 1 < boardCols-1)
 				{
 					cellSet.add(new BoardCell(i, e+1));
 				}
@@ -56,6 +56,8 @@ public class IntBoard {
 	}
 	public void calcTargets(BoardCell startCell, int pathLength)
 	{
+		targets.clear();
+		visited.clear();
 		visited.add(startCell);
 		calcAdjacencies();//might not need this later when we start coding.
 		findAllTargets(startCell, pathLength);
