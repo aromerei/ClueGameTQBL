@@ -1,102 +1,92 @@
 package experiment;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-import java.util.TreeSet;
-
-import experiment.BoardCell;
 
 public class IntBoard {
-	private Map<BoardCell, Set<BoardCell>> adjMtx;
-	private Set<BoardCell> visited;
-	private Set<BoardCell> targets;
-	private BoardCell[][] grid;
-	private static int  boardRows;
-	private static int boardCols;
-	
-	
-	public IntBoard(int x, int y)
-	{
-		adjMtx = new HashMap<>();
-		visited = new TreeSet<>();
-		targets = new TreeSet<>();
-		grid = new BoardCell[x][y];
-		boardRows = x;
-		boardCols = y;
-	}
-	public void calcAdjacencies()
-	{
-		Set<BoardCell> cellSet =  new TreeSet<>();
-		for(int i = 0; i < boardRows; i++)
+
+		private Map<BoardCell, HashSet<BoardCell>> adjMtx;
+		private Set<BoardCell> visited;
+		private Set<BoardCell> targets;
+		private BoardCell[][] grid = new BoardCell[4][4];
+		
+		public IntBoard()
 		{
-			for(int e = 0; e < boardCols; i++)
+			for(int i = 0; i < grid.length-1; i++)
 			{
-				BoardCell temp = new BoardCell(i,e);
-				if(i - 1 >= 0)
+				for(int e = 0; e < grid[i].length-1; e++)
 				{
-					cellSet.add(new BoardCell(i-1, e));
+					
+					grid[i][e] = new BoardCell(i,e);
 				}
-				if(i + 1 != boardRows -1)
+			}
+			adjMtx = new HashMap<BoardCell, HashSet<BoardCell>>();
+			visited = new HashSet<BoardCell>();
+			targets = new HashSet<BoardCell>();
+		}
+		public void calcAdjacencies()
+		{
+			for(int i = 0; i < grid.length; i ++)
+			{
+				for(int e = 0; e < grid.length; e++)
 				{
-					cellSet.add(new BoardCell(i+1, e));
+					//e = cols; i = rows.
+					HashSet<BoardCell> temp = new HashSet<BoardCell>();
+					if(e - 1 >= 0) // if up is in bounds
+					{
+						temp.add(grid[i][e-1]);
+					}
+					if(e+1<=grid.length - 1) // if down is in bounds
+					{
+						temp.add(grid[i][e+1]);
+					}
+					if(i - 1 >= 0)// if left is in bounds
+					{
+						temp.add(grid[i-1][e]);
+					}
+					if(i+1 <=grid.length-1)// if right is in bounds 
+					{
+						temp.add(grid[i+1][e]);
+					}
+					adjMtx.put(grid[i][e], temp);
 				}
-				if(e - 1 >= 0)
-				{
-					cellSet.add(new BoardCell(i, e-1));
-				}
-				if(e + 1 < boardCols-1)
-				{
-					cellSet.add(new BoardCell(i, e+1));
-				}
-				adjMtx.put(temp,cellSet);
 			}
 		}
-	}
-	public void calcTargets(BoardCell startCell, int pathLength)
-	{
-		targets.clear();
-		visited.clear();
-		visited.add(startCell);
-		calcAdjacencies();//might not need this later when we start coding.
-		findAllTargets(startCell, pathLength);
-	}
-	private void findAllTargets(BoardCell thisCell, int numSteps)
-	{
-		for(BoardCell c: adjMtx.get(thisCell))
+		public void calcTargets(BoardCell startCell, int pathLength)
 		{
-			if(!visited.contains(c))
+			visited.clear();
+			visited.add(startCell);
+			findAllTargets(startCell, pathLength);
+		}
+		private void findAllTargets(BoardCell startCell, int pathLength)
+		{
+			for(BoardCell c: adjMtx.get(startCell))
 			{
-				visited.add(c);
-				if(numSteps == 1)
+				if(!(visited.contains(c)))
 				{
-					targets.add(c);
+					visited.add(c);
+					if(pathLength == 1)
+					{
+						targets.add(c);
+					}
+					findAllTargets(c,pathLength-1);
+					visited.remove(c);
 				}
-				else
-				{
-					findAllTargets(c,numSteps-1);
-				}
-				visited.remove(c);
 			}
 		}
-		
-	}
-	public Set<BoardCell> getTargets()
-	{
-		Set<BoardCell> temp = new HashSet<BoardCell>();
-		
-		return temp;
-	}
-	public Set<BoardCell> getAdjList(BoardCell cell)
-	{
-		Set<BoardCell> temp = new HashSet<BoardCell>();
-		
-		return temp;
-	}
-	public BoardCell getCell(int i, int x) 
-	{
-		BoardCell temp = new BoardCell(i, x);
-		return temp;
-	}
+		public Set<BoardCell> getTargets()
+		{
+			return targets;
+		}
+		public Set<BoardCell> getAdjList(BoardCell place)
+		{
+			return adjMtx.get(place);
+		}
+		public BoardCell getCell(int x, int y)
+		{
+			return grid[x][y];
+		}
 }
