@@ -1,0 +1,65 @@
+commit 11b31b2efd67fc5b41672afbee66b023e01aa6b4
+Author: BuildTools <unconfigured@null.spigotmc.org>
+Date:   Mon Feb 27 20:35:46 2017 -0700
+
+    fixed tests, updated calcTargets and findAllTargets to pass tests
+
+commit 240c9c522c739ab216f9a83f4918cebcda0b4245
+Author: Tyler Quast <Tyler Quast>
+Date:   Fri Feb 24 21:21:01 2017 -0700
+
+    failing tests completed
+
+commit 57faf0738828268ed3490d2bf37c685f39d7c4b2
+Author: Tyler Quast <Tyler Quast>
+Date:   Fri Feb 24 18:42:56 2017 -0700
+
+    update 3
+
+commit a98d35848acb2b8dec07e22ff32aedf6a5a9f9ef
+Author: Tyler Quast <Tyler Quast>
+Date:   Fri Feb 24 17:16:25 2017 -0700
+
+    update
+
+commit 1ce6696ef0d5f97407428cb4d951f90bfaa4b876
+Author: Tyler Quast <Tyler Quast>
+Date:   Fri Feb 24 16:18:31 2017 -0700
+
+    update
+
+commit 65482097f94cca004372479cf775f403cc82ed46
+Author: Tyler Quast <Tyler Quast>
+Date:   Fri Feb 24 15:15:38 2017 -0700
+
+    more classes
+
+commit 2d26a8de082f884d7b0b1f02faf15cbbc27105b5
+Author: Tyler Quast <Tyler Quast>
+Date:   Fri Feb 24 15:15:03 2017 -0700
+
+    more classes
+
+commit f7860dbcc29d0ff2a25c51eae18fc84196a4189b
+Author: Tyler Quast <Tyler Quast>
+Date:   Fri Feb 24 14:44:28 2017 -0700
+
+    first class
+
+commit 17b49ba3e3327fcfbdfed9d6d19c635e9ac23181
+Author: Tyler Quast <Tyler Quast>
+Date:   Fri Feb 24 14:37:58 2017 -0700
+
+    intial upload
+
+commit 50829bb3f04fe1719ff28c6f18d4fa9b82db98b3
+Author: Tyler Quast <Tyler Quast>
+Date:   Fri Feb 24 14:36:50 2017 -0700
+
+    adding files
+
+commit d378cddf7e7e0a4e19b05bb255e173599dd24cfe
+Author: tylerquast <tylerquast@mymail.mines.edu>
+Date:   Fri Feb 24 14:27:31 2017 -0700
+
+    Initial commit
