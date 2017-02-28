@@ -1,0 +1,11 @@
+M, Movie Theatre, Card
+B, BedRoom, Card
+K, Kitchen, Card
+A, Bar, Card
+S, Study Room, Card
+T, BathRoom, Card
+C, Computer Room, Card
+H, Sun Room, Card
+O, Observatory, Card
+W, WalkWay, Other
+X, Closit, OtherS
