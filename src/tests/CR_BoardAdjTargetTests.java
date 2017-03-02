@@ -288,7 +288,6 @@ public class CR_BoardAdjTargetTests {
 		//
 		assertTrue(targets.contains(board.getCellAt(11, 7)));
 		assertTrue(targets.contains(board.getCellAt(12, 8)));
-
 	}
 
 	// Test getting out of a room
@@ -309,5 +308,4 @@ public class CR_BoardAdjTargetTests {
 		assertTrue(targets.contains(board.getCellAt(5, 19)));
 		assertTrue(targets.contains(board.getCellAt(4, 18)));
 	}
-
 }
