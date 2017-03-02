@@ -1,9 +1,14 @@
 package clueGame;
 
 public class BoardCell {
+	public enum CellType {
+		ROOM, WALKWAY, DOORWAY
+	}
+
 	private int row;
 	private int column;
 	private char initial;
+	private DoorDirection doordir;
 
 	public BoardCell() {
 		row = 0;
@@ -14,21 +19,19 @@ public class BoardCell {
 		row = i;
 		column = e;
 		initial = c;
+		doordir = DoorDirection.NONE;
 	}
-	
-	public boolean isWalkway()
-	{
+
+	public boolean isWalkway() {
 		return false;
 	}
-	
-	public boolean isRoom()
-	{
+
+	public boolean isRoom() {
 		return false;
 	}
-	
-	public boolean isDoorway()
-	{
-		return false;
+
+	public boolean isDoorway() {
+		return doordir != DoorDirection.NONE;
 	}
 
 	public int getRow() {
@@ -43,14 +46,17 @@ public class BoardCell {
 	public String toString() {
 		return "BoardCell [row=" + row + ", column=" + column + "]";
 	}
+	
+	public void setDoorDirection(DoorDirection dir) {
+		doordir = dir;
+	}
 
 	public DoorDirection getDoorDirection() {
-		return DoorDirection.NONE;
+		return doordir;
 	}
 
 	public char getInitial() {
 		return initial;
 	}
 
-	
 }

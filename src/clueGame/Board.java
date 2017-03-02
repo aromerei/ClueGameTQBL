@@ -67,15 +67,34 @@ public class Board {
 		while (in.hasNextLine()) {
 			String boardrow = in.nextLine();
 			col = 0;
-			while (boardrow.length() > 1) {
+			while (boardrow.length() > 0) {
 				if (debug)
 					System.out.println("adding boardcell at " + row + ", " + col + " of type " + boardrow.charAt(0));
 				board[row][col] = new BoardCell(row, col, boardrow.charAt(0));
-				boardrow = boardrow.substring(boardrow.indexOf(",") + 1);
+				if (boardrow.length() > 1 && boardrow.charAt(1) != ',') {
+					if (boardrow.charAt(1) != 'N') {
+						switch (boardrow.charAt(1)) {
+						case 'U':
+							board[row][col].setDoorDirection(DoorDirection.UP);
+							break;
+						case 'D':
+							board[row][col].setDoorDirection(DoorDirection.DOWN);
+							break;
+						case 'R':
+							board[row][col].setDoorDirection(DoorDirection.RIGHT);
+							break;
+						case 'L':
+							board[row][col].setDoorDirection(DoorDirection.LEFT);
+							break;
+						}
+					}
+				}
 				col++;
+				if (boardrow.contains(","))
+					boardrow = boardrow.substring(boardrow.indexOf(",") + 1);
+				else
+					boardrow = "";
 			}
-			board[row][col] = new BoardCell(row, col, boardrow.charAt(0));
-			col++;
 			row++;
 		}
 		if (debug)
