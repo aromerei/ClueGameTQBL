@@ -1,12 +1,22 @@
 package clueGame;
 
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
+
+import com.sun.jmx.snmp.Timestamp;
 
 public class Board {
 	private int numRows;
@@ -39,6 +49,22 @@ public class Board {
 			loadRoomConfig();
 			loadBoardConfig();
 		} catch (Exception e) {
+			if (debug) System.out.println("caught error, printing to logfile");
+			Date date = new Date();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd-HH.mm.ss");
+			File errorlog = new File(sdf.format(date) + ".log");
+			if (debug) System.out.println("creating log " + errorlog);
+			try {
+				errorlog.createNewFile();
+				BufferedWriter writer = new BufferedWriter(new FileWriter(errorlog));
+				StringWriter sw = new StringWriter();
+				PrintWriter pw = new PrintWriter(sw);
+				e.printStackTrace(pw);
+				writer.write(sw.toString());
+				writer.close();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 			System.out.println(e);
 		}
 		calcAdjacencies();
@@ -54,8 +80,9 @@ public class Board {
 				System.out.println("adding entry: " + entry + "\ntesting room type: \""
 						+ entry.substring(entry.lastIndexOf(",") + 2) + "\"");
 			if (!entry.substring(entry.lastIndexOf(",") + 2).equals("Card")
-					&& !entry.substring(entry.lastIndexOf(",") + 2).equals("Other"))
-				throw new BadConfigFormatException("Room type incorrect, must be of type Card or Other");
+					&& !entry.substring(entry.lastIndexOf(",") + 2).equals("Other")) {
+				throw new BadConfigFormatException("Room type incorrect, must be of type Card or Other");				
+			}
 			legend.put(entry.charAt(0), entry.substring(3, entry.indexOf(",", 3)));
 		}
 		if (debug)
