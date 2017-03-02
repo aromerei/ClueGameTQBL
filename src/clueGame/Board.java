@@ -170,4 +170,15 @@ public class Board {
 	public BoardCell getCellAt(int i, int j) {
 		return board[i][j];
 	}
+
+	public Set<BoardCell> getAdjList(int i, int j) {
+		return null;
+	}
+
+	public void calcTargets(int i, int j, int k) {		
+	}
+
+	public Set<BoardCell> getTargets() {
+		return targets;
+	}
 }
