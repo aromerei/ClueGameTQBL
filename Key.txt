@@ -8,4 +8,4 @@ C, Computer Room, Card
 H, Sun Room, Card
 O, Observatory, Card
 W, WalkWay, Other
-X, Closit, OtherS
+X, Closet, Other

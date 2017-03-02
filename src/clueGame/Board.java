@@ -17,7 +17,7 @@ public class Board {
 	private Set<BoardCell> targets;
 	private String boardConfigFile;
 	private String roomConfigFile;
-	private boolean debug = true;
+	private boolean debug = false;
 
 	// variable used for singleton pattern
 	private static Board theInstance = new Board();
@@ -38,27 +38,31 @@ public class Board {
 		try {
 			loadRoomConfig();
 			loadBoardConfig();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
+			System.out.println(e);
 		}
 		calcAdjacencies();
 	}
 
-	public void loadRoomConfig() throws FileNotFoundException {
+	public void loadRoomConfig() throws FileNotFoundException, BadConfigFormatException {
 		FileReader reader;
 		reader = new FileReader(roomConfigFile);
 		Scanner in = new Scanner(reader);
 		while (in.hasNextLine()) {
 			String entry = in.nextLine();
 			if (debug)
-				System.out.println("adding entry: " + entry);
+				System.out.println("adding entry: " + entry + "\ntesting room type: \""
+						+ entry.substring(entry.lastIndexOf(",") + 2) + "\"");
+			if (!entry.substring(entry.lastIndexOf(",") + 2).equals("Card")
+					&& !entry.substring(entry.lastIndexOf(",") + 2).equals("Other"))
+				throw new BadConfigFormatException("Room type incorrect, must be of type Card or Other");
 			legend.put(entry.charAt(0), entry.substring(3, entry.indexOf(",", 3)));
 		}
 		if (debug)
 			System.out.println("added " + legend.size() + " legend entries");
 	}
 
-	public void loadBoardConfig() throws FileNotFoundException {
+	public void loadBoardConfig() throws FileNotFoundException, BadConfigFormatException {
 		FileReader reader;
 		reader = new FileReader(boardConfigFile);
 		Scanner in = new Scanner(reader);
@@ -70,6 +74,8 @@ public class Board {
 			while (boardrow.length() > 0) {
 				if (debug)
 					System.out.println("adding boardcell at " + row + ", " + col + " of type " + boardrow.charAt(0));
+				if (!legend.containsKey(boardrow.charAt(0)))
+					throw new BadConfigFormatException("Room type does not exist ");
 				board[row][col] = new BoardCell(row, col, boardrow.charAt(0));
 				if (boardrow.length() > 1 && boardrow.charAt(1) != ',') {
 					if (boardrow.charAt(1) != 'N') {
@@ -95,12 +101,16 @@ public class Board {
 				else
 					boardrow = "";
 			}
+			if (debug)
+				System.out.println("Columns: " + numColumns + " read cols: " + col);
+			if (row > 1 && col != numColumns)
+				throw new BadConfigFormatException("Column count does not match");
+			numColumns = col;
 			row++;
 		}
 		if (debug)
 			System.out.println("rows: " + row + " cols: " + col);
 		numRows = row;
-		numColumns = col;
 	}
 
 	public void calcAdjacencies() {

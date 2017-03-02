@@ -40,7 +40,7 @@ public class TQBL_FileInitTests {
 		assertEquals("Bar", legend.get('A'));
 		assertEquals("Study Room", legend.get('S'));
 		assertEquals("BathRoom", legend.get('T'));
-		assertEquals("Computer Room", legend.get('S'));
+		assertEquals("Computer Room", legend.get('C'));
 		assertEquals("Sun Room", legend.get('H'));
 		assertEquals("Observatory", legend.get('O'));
 	}
