@@ -48,7 +48,7 @@ public class BoardCell {
 	}
 
 	public char getInitial() {
-		return ' ';
+		return initial;
 	}
 
 	
