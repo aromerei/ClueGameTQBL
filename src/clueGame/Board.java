@@ -34,6 +34,7 @@ public class Board {
 	public void initialize() {
 		legend = new HashMap<Character, String>();
 		targets = new HashSet<BoardCell>();
+		board = new BoardCell[MAX_BOARD_SIZE][MAX_BOARD_SIZE];
 		try {
 			loadRoomConfig();
 			loadBoardConfig();
@@ -62,11 +63,25 @@ public class Board {
 		reader = new FileReader(boardConfigFile);
 		Scanner in = new Scanner(reader);
 		int col = 0;
-		in.useDelimiter(",");
-		int row = 0;		
-		while (in.hasNext()) {
-			break;
+		int row = 0;
+		while (in.hasNextLine()) {
+			String boardrow = in.nextLine();
+			col = 0;
+			while (boardrow.length() > 1) {
+				if (debug)
+					System.out.println("adding boardcell at " + row + ", " + col + " of type " + boardrow.charAt(0));
+				board[row][col] = new BoardCell(row, col, boardrow.charAt(0));
+				boardrow = boardrow.substring(boardrow.indexOf(",") + 1);
+				col++;
+			}
+			board[row][col] = new BoardCell(row, col, boardrow.charAt(0));
+			col++;
+			row++;
 		}
+		if (debug)
+			System.out.println("rows: " + row + " cols: " + col);
+		numRows = row;
+		numColumns = col;
 	}
 
 	public void calcAdjacencies() {
@@ -85,23 +100,18 @@ public class Board {
 	}
 
 	public Map<Character, String> getLegend() {
-
 		return legend;
 	}
 
 	public int getNumRows() {
-
 		return numRows;
 	}
 
 	public int getNumColumns() {
-
 		return numColumns;
 	}
 
 	public BoardCell getCellAt(int i, int j) {
-
 		return board[i][j];
 	}
-
 }

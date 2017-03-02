@@ -10,9 +10,10 @@ public class BoardCell {
 		column = 0;
 	}
 
-	public BoardCell(int i, int e) {
+	public BoardCell(int i, int e, char c) {
 		row = i;
 		column = e;
+		initial = c;
 	}
 	
 	public boolean isWalkway()
