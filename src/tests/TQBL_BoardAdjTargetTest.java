@@ -10,7 +10,7 @@ import org.junit.Test;
 import clueGame.Board;
 import clueGame.BoardCell;
 
-public class TQBL_BardAdjTargetTest {
+public class TQBL_BoardAdjTargetTest {
 
 	private static Board board;
 
