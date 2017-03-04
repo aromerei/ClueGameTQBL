@@ -3,6 +3,7 @@ package tests;
 import static org.junit.Assert.*;
 
 import java.util.Map;
+import java.util.Set;
 
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -52,23 +53,41 @@ public class TQBL_FileInitTests {
 		assertEquals(NUM_COLUMNS, board.getNumColumns());		
 	}
 	
+	//test door directions and ensure that only valid adjacent cell is the walkway
 	@Test
 	public void FourDoorDirections() {
 		BoardCell room = board.getCellAt(8, 4);
 		assertTrue(room.isDoorway());
 		assertEquals(DoorDirection.RIGHT, room.getDoorDirection());
+		
+		Set<BoardCell> testList = board.getAdjList(8, 4);
+		assertEquals(1, testList.size());
+		assertTrue(testList.contains(board.getCellAt(8, 5)));
+		
 		room = board.getCellAt(4, 8);
 		assertTrue(room.isDoorway());
 		assertEquals(DoorDirection.DOWN, room.getDoorDirection());
+		
+		testList = board.getAdjList(4, 8);
+		assertEquals(1, testList.size());
+		assertTrue(testList.contains(board.getCellAt(5, 8)));
+		
 		room = board.getCellAt(12, 11);
 		assertTrue(room.isDoorway());
 		assertEquals(DoorDirection.LEFT, room.getDoorDirection());
+		
+		testList = board.getAdjList(12, 11);
+		assertEquals(1, testList.size());
+		assertTrue(testList.contains(board.getCellAt(12, 10)));
+		
 		room = board.getCellAt(10, 8);
 		assertTrue(room.isDoorway());
 		assertEquals(DoorDirection.UP, room.getDoorDirection());
+		
 		// Test that room pieces that aren't doors know it
 		room = board.getCellAt(0, 0);
 		assertFalse(room.isDoorway());	
+		
 		// Test that walkways are not doors
 		BoardCell cell = board.getCellAt(5, 5);
 		assertFalse(cell.isDoorway());		

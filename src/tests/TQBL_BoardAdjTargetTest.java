@@ -22,7 +22,7 @@ public class TQBL_BoardAdjTargetTest {
 	}
 
 	@Test
-	public void testAdjacenciesInsideRooms() {//fix later
+	public void testAdjacenciesInsideRooms() {// fix later
 		// Test a corner
 		Set<BoardCell> testList = board.getAdjList(0, 0);
 		assertEquals(0, testList.size());
@@ -42,36 +42,37 @@ public class TQBL_BoardAdjTargetTest {
 		testList = board.getAdjList(5, 20);
 		assertEquals(0, testList.size());
 	}
-	
+
+	// green border
 	@Test
 	public void testAdjacencyDoorways() {
 		// Test beside a door direction RIGHT
-		Set<BoardCell> testList = board.getAdjList(4, 5);
-		assertTrue(testList.contains(board.getCellAt(3, 5)));
-		assertTrue(testList.contains(board.getCellAt(4, 6)));
-		assertTrue(testList.contains(board.getCellAt(5, 5)));
-		assertTrue(testList.contains(board.getCellAt(4, 4)));
-		assertEquals(3, testList.size());
+		Set<BoardCell> testList = board.getAdjList(8, 5);
+		assertTrue(testList.contains(board.getCellAt(7, 5)));
+		assertTrue(testList.contains(board.getCellAt(8, 6)));
+		assertTrue(testList.contains(board.getCellAt(9, 5)));
+		assertTrue(testList.contains(board.getCellAt(8, 4)));
+		assertEquals(4, testList.size());
 		// Test beside a door direction DOWN
-		testList = board.getAdjList(6, 15);
-		assertTrue(testList.contains(board.getCellAt(5, 15)));
-		assertTrue(testList.contains(board.getCellAt(6, 14)));
-		assertTrue(testList.contains(board.getCellAt(6, 16)));
-		assertEquals(3, testList.size());
+		testList = board.getAdjList(5, 4);
+		assertTrue(testList.contains(board.getCellAt(4, 4)));
+		assertTrue(testList.contains(board.getCellAt(5, 5)));
+		assertTrue(testList.contains(board.getCellAt(6, 4)));
+		assertTrue(testList.contains(board.getCellAt(5, 3)));
+		assertEquals(4, testList.size());
 		// Test beside a door direction LEFT
-		testList = board.getAdjList(15, 17);
-		assertTrue(testList.contains(board.getCellAt(15, 16)));
-		assertTrue(testList.contains(board.getCellAt(15, 18)));
-		assertTrue(testList.contains(board.getCellAt(14, 17)));
-		assertTrue(testList.contains(board.getCellAt(16, 17)));
+		testList = board.getAdjList(12, 10);
+		assertTrue(testList.contains(board.getCellAt(11, 10)));
+		assertTrue(testList.contains(board.getCellAt(12, 11)));
+		assertTrue(testList.contains(board.getCellAt(13, 10)));
+		assertTrue(testList.contains(board.getCellAt(12, 9)));
 		assertEquals(4, testList.size());
 		// Test beside a door direction UP
-		testList = board.getAdjList(13, 11);
-		assertTrue(testList.contains(board.getCellAt(13, 10)));
-		assertTrue(testList.contains(board.getCellAt(13, 12)));
-		assertTrue(testList.contains(board.getCellAt(12, 11)));
-		assertTrue(testList.contains(board.getCellAt(14, 11)));
+		testList = board.getAdjList(9, 8);
+		assertTrue(testList.contains(board.getCellAt(8, 8)));
+		assertTrue(testList.contains(board.getCellAt(9, 9)));
+		assertTrue(testList.contains(board.getCellAt(10, 8)));
+		assertTrue(testList.contains(board.getCellAt(9, 7)));
 		assertEquals(4, testList.size());
 	}
-
 }
