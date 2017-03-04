@@ -59,7 +59,6 @@ public class TQBL_FileInitTests {
 		BoardCell room = board.getCellAt(8, 4);
 		assertTrue(room.isDoorway());
 		assertEquals(DoorDirection.RIGHT, room.getDoorDirection());
-		
 		Set<BoardCell> testList = board.getAdjList(8, 4);
 		assertEquals(1, testList.size());
 		assertTrue(testList.contains(board.getCellAt(8, 5)));
@@ -67,7 +66,6 @@ public class TQBL_FileInitTests {
 		room = board.getCellAt(4, 8);
 		assertTrue(room.isDoorway());
 		assertEquals(DoorDirection.DOWN, room.getDoorDirection());
-		
 		testList = board.getAdjList(4, 8);
 		assertEquals(1, testList.size());
 		assertTrue(testList.contains(board.getCellAt(5, 8)));
@@ -75,7 +73,6 @@ public class TQBL_FileInitTests {
 		room = board.getCellAt(12, 11);
 		assertTrue(room.isDoorway());
 		assertEquals(DoorDirection.LEFT, room.getDoorDirection());
-		
 		testList = board.getAdjList(12, 11);
 		assertEquals(1, testList.size());
 		assertTrue(testList.contains(board.getCellAt(12, 10)));
@@ -83,6 +80,9 @@ public class TQBL_FileInitTests {
 		room = board.getCellAt(10, 8);
 		assertTrue(room.isDoorway());
 		assertEquals(DoorDirection.UP, room.getDoorDirection());
+		testList = board.getAdjList(10, 8);
+		assertEquals(1, testList.size());
+		assertTrue(testList.contains(board.getCellAt(9, 8)));
 		
 		// Test that room pieces that aren't doors know it
 		room = board.getCellAt(0, 0);

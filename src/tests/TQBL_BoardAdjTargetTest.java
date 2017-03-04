@@ -79,6 +79,7 @@ public class TQBL_BoardAdjTargetTest {
 	// test various travel distances of selected cells
 	@Test
 	public void testWalkwayCells() {
+		// test targets for cell adjacent to one doorway and near another
 		// 1 step
 		board.calcTargets(6, 12, 1);
 		Set<BoardCell> targets = board.getTargets();
@@ -119,6 +120,7 @@ public class TQBL_BoardAdjTargetTest {
 		targets = board.getTargets();
 		assertEquals(20, targets.size());
 
+		// test targets for cell with multiple doors in range
 		// 1 step
 		board.calcTargets(7, 8, 1);
 		targets = board.getTargets();
@@ -144,6 +146,12 @@ public class TQBL_BoardAdjTargetTest {
 		targets = board.getTargets();
 		assertEquals(32, targets.size());
 
+		// test targets and adjacency list of walkway in corner with no doors in
+		// range
+		Set<BoardCell> testList = board.getAdjList(10, 0);
+		assertTrue(testList.contains(board.getCellAt(10, 1)));
+		assertTrue(testList.contains(board.getCellAt(11, 0)));
+		assertEquals(2, testList.size());
 		// 1 step
 		board.calcTargets(10, 0, 1);
 		targets = board.getTargets();
@@ -169,6 +177,12 @@ public class TQBL_BoardAdjTargetTest {
 		targets = board.getTargets();
 		assertEquals(6, targets.size());
 
+		// test targets and adjacency list of walkway in vertical corridor with
+		// no doors in range
+		testList = board.getAdjList(13, 0);
+		assertTrue(testList.contains(board.getCellAt(12, 0)));
+		assertTrue(testList.contains(board.getCellAt(14, 0)));
+		assertEquals(2, testList.size());
 		// 1 step
 		board.calcTargets(13, 0, 1);
 		targets = board.getTargets();
@@ -194,6 +208,13 @@ public class TQBL_BoardAdjTargetTest {
 		targets = board.getTargets();
 		assertEquals(7, targets.size());
 
+		// test targets and adjacent cells for walkway in T with one door
+		// adjacent
+		testList = board.getAdjList(21, 5);
+		assertTrue(testList.contains(board.getCellAt(21, 4)));
+		assertTrue(testList.contains(board.getCellAt(20, 5)));
+		assertTrue(testList.contains(board.getCellAt(21, 6)));
+		assertEquals(3, testList.size());
 		// 1 step
 		board.calcTargets(21, 5, 1);
 		targets = board.getTargets();
@@ -219,6 +240,12 @@ public class TQBL_BoardAdjTargetTest {
 		targets = board.getTargets();
 		assertEquals(10, targets.size());
 
+		// test targets and adjacency cells of walkway in horizontal corridor
+		// with one door in range
+		testList = board.getAdjList(21, 9);
+		assertTrue(testList.contains(board.getCellAt(21, 8)));
+		assertTrue(testList.contains(board.getCellAt(21, 10)));
+		assertEquals(2, testList.size());
 		// 1 step
 		board.calcTargets(21, 9, 1);
 		targets = board.getTargets();
@@ -244,6 +271,7 @@ public class TQBL_BoardAdjTargetTest {
 		targets = board.getTargets();
 		assertEquals(7, targets.size());
 
+		// test targets of walkway in corner with no doors in range
 		// 1 step
 		board.calcTargets(21, 13, 1);
 		targets = board.getTargets();
@@ -269,6 +297,12 @@ public class TQBL_BoardAdjTargetTest {
 		targets = board.getTargets();
 		assertEquals(11, targets.size());
 
+		// test targets and adjacent cells of walkway next to one door and
+		// closet
+		testList = board.getAdjList(21, 20);
+		assertTrue(testList.contains(board.getCellAt(21, 19)));
+		assertTrue(testList.contains(board.getCellAt(21, 21)));
+		assertEquals(2, testList.size());
 		// 1 step
 		board.calcTargets(21, 20, 1);
 		targets = board.getTargets();
