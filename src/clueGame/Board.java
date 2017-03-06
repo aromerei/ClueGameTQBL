@@ -18,6 +18,8 @@ import java.util.Set;
 
 import com.sun.jmx.snmp.Timestamp;
 
+import clueGame.BoardCell;
+
 public class Board {
 	private int numRows;
 	private int numColumns;
@@ -25,6 +27,8 @@ public class Board {
 	private BoardCell[][] board;
 	private Map<Character, String> legend;
 	private Set<BoardCell> targets;
+	private Map<BoardCell, HashSet<BoardCell>> adjMtx;
+	private Set<BoardCell> visited;
 	private String boardConfigFile;
 	private String roomConfigFile;
 	private boolean debug = false;
@@ -44,16 +48,20 @@ public class Board {
 	public void initialize() {
 		legend = new HashMap<Character, String>();
 		targets = new HashSet<BoardCell>();
+		adjMtx = new HashMap<BoardCell, HashSet<BoardCell>>();
+		visited = new HashSet<BoardCell>();
 		board = new BoardCell[MAX_BOARD_SIZE][MAX_BOARD_SIZE];
 		try {
 			loadRoomConfig();
 			loadBoardConfig();
 		} catch (Exception e) {
-			if (debug) System.out.println("caught error, printing to logfile");
+			if (debug)
+				System.out.println("caught error, printing to logfile");
 			Date date = new Date();
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd-HH.mm.ss");
 			File errorlog = new File(sdf.format(date) + ".log");
-			if (debug) System.out.println("creating log " + errorlog);
+			if (debug)
+				System.out.println("creating log " + errorlog);
 			try {
 				errorlog.createNewFile();
 				BufferedWriter writer = new BufferedWriter(new FileWriter(errorlog));
@@ -81,7 +89,7 @@ public class Board {
 						+ entry.substring(entry.lastIndexOf(",") + 2) + "\"");
 			if (!entry.substring(entry.lastIndexOf(",") + 2).equals("Card")
 					&& !entry.substring(entry.lastIndexOf(",") + 2).equals("Other")) {
-				throw new BadConfigFormatException("Room type incorrect, must be of type Card or Other");				
+				throw new BadConfigFormatException("Room type incorrect, must be of type Card or Other");
 			}
 			legend.put(entry.charAt(0), entry.substring(3, entry.indexOf(",", 3)));
 		}
@@ -141,11 +149,50 @@ public class Board {
 	}
 
 	public void calcAdjacencies() {
-
+		for (int i = 0; i < numRows; i++) {
+			for (int e = 0; e < numColumns; e++) {
+				// e = cols; i = rows.
+				HashSet<BoardCell> temp = new HashSet<BoardCell>();
+				if (e - 1 >= 0) // if up is in bounds
+				{
+					temp.add(board[i][e - 1]);
+				}
+				if (e + 1 < numRows) // if down is in bounds
+				{
+					temp.add(board[i][e + 1]);
+				}
+				if (i - 1 >= 0)// if left is in bounds
+				{
+					temp.add(board[i - 1][e]);
+				}
+				if (i + 1 < numColumns)// if right is in bounds
+				{
+					temp.add(board[i + 1][e]);
+				}
+				adjMtx.put(board[i][e], temp);
+			}
+		}
 	}
 
 	public void calcTargets(BoardCell startCell, int pathLength) {
+		visited.clear();
+		visited.add(startCell);
+		targets.clear();
+		findAllTargets(startCell, pathLength);
+	}
 
+	private void findAllTargets(BoardCell startCell, int pathLength) {
+		for (BoardCell c : adjMtx.get(startCell)) {
+			if (!(visited.contains(c))) {
+				visited.add(c);
+				if (pathLength == 1) {
+					targets.add(c);
+				} else {
+					findAllTargets(c, pathLength - 1);
+				}
+				visited.remove(c);
+			}
+		}
 	}
 
 	public void setConfigFiles(String board, String rooms) {
@@ -175,7 +222,7 @@ public class Board {
 		return null;
 	}
 
-	public void calcTargets(int i, int j, int k) {		
+	public void calcTargets(int i, int j, int k) {
 	}
 
 	public Set<BoardCell> getTargets() {
