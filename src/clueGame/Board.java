@@ -76,6 +76,7 @@ public class Board {
 			System.out.println(e);
 		}
 		calcAdjacencies();
+		
 	}
 
 	public void loadRoomConfig() throws FileNotFoundException, BadConfigFormatException {
@@ -155,20 +156,25 @@ public class Board {
 				HashSet<BoardCell> temp = new HashSet<BoardCell>();
 				if (e - 1 >= 0) // if up is in bounds
 				{
-					temp.add(board[i][e - 1]);
+					if(board[i][e-1].getInitial() == 'W')
+						temp.add(board[i][e - 1]);
 				}
 				if (e + 1 < numRows) // if down is in bounds
 				{
-					temp.add(board[i][e + 1]);
+					if(board[i][e+1].getInitial() == 'W')
+						temp.add(board[i][e + 1]);
 				}
 				if (i - 1 >= 0)// if left is in bounds
 				{
-					temp.add(board[i - 1][e]);
+					if(board[i - 1][e].getInitial() == 'W')
+						temp.add(board[i - 1][e]);
 				}
-				if (i + 1 < numColumns)// if right is in bounds
+				if (i + 1 < numColumns-1 )// if right is in bounds
 				{
-					temp.add(board[i + 1][e]);
+					if(board[i + 1][e].getInitial() == 'W')
+						temp.add(board[i + 1][e]);
 				}
+				
 				adjMtx.put(board[i][e], temp);
 			}
 		}
@@ -219,7 +225,7 @@ public class Board {
 	}
 
 	public Set<BoardCell> getAdjList(int i, int j) {
-		return null;
+		return adjMtx.get(board[i][j]);
 	}
 
 	public void calcTargets(int i, int j, int k) {
