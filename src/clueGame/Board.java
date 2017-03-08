@@ -12,6 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
@@ -154,50 +155,89 @@ public class Board {
 			for (int e = 0; e < numColumns; e++) {
 				// e = cols; i = rows.
 				HashSet<BoardCell> temp = new HashSet<BoardCell>();
-				if (e - 1 >= 0) // if up is in bounds
+				if(board[i][e].getDoorDirection() != DoorDirection.NONE)
 				{
-					if(board[i][e-1].getInitial() == 'W')
-						temp.add(board[i][e - 1]);
+					switch(board[i][e].getDoorDirection())
+					{
+					case UP:
+						temp.add(board[i-1][e]);
+						break;
+					case DOWN:
+						temp.add(board[i+1][e]);
+						break;
+					case LEFT:
+						temp.add(board[i][e-1]);
+						break;
+					case RIGHT:
+						temp.add(board[i][e+1]);
+						break;
+					case NONE:
+						break;
+					}
 				}
-				if (e + 1 < numRows) // if down is in bounds
+				else if(board[i][e].getInitial() == 'W')
 				{
-					if(board[i][e+1].getInitial() == 'W')
-						temp.add(board[i][e + 1]);
+					if (e - 1 >= 0) // if Left is in bounds
+					{
+						if(board[i][e - 1].getInitial() == 'W' || board[i][e-1].getDoorDirection() == DoorDirection.RIGHT)
+						{
+							temp.add(board[i][e - 1]);		
+						}	
+					}
+					if (e + 1 < numColumns) // if right is in bounds
+					{
+						if(board[i][e+1].getInitial() == 'W' || board[i][e+1].getDoorDirection() == DoorDirection.LEFT)
+							temp.add(board[i][e + 1]);
+					}
+					if (i - 1 >= 0)// if Up is in bounds
+					{
+						if(board[i - 1][e].getInitial() == 'W' || board[i - 1][e].getDoorDirection() == DoorDirection.DOWN)
+							temp.add(board[i - 1][e]);
+					}
+					if (i + 1 < numRows)// if Down is in bounds
+					{
+						if(board[i + 1][e].getInitial() == 'W' || board[i + 1][e].getDoorDirection() == DoorDirection.UP)
+							temp.add(board[i + 1][e]);			
+					}
+					
 				}
-				if (i - 1 >= 0)// if left is in bounds
-				{
-					if(board[i - 1][e].getInitial() == 'W')
-						temp.add(board[i - 1][e]);
-				}
-				if (i + 1 < numColumns-1 )// if right is in bounds
-				{
-					if(board[i + 1][e].getInitial() == 'W')
-						temp.add(board[i + 1][e]);
-				}
-				
 				adjMtx.put(board[i][e], temp);
+				
+				
 			}
 		}
 	}
 
-	public void calcTargets(BoardCell startCell, int pathLength) {
-		visited.clear();
-		visited.add(startCell);
-		targets.clear();
-		findAllTargets(startCell, pathLength);
-	}
+//	public void calcTargets(BoardCell startCell, int pathLength) {
+//		visited.clear();
+//		visited.add(startCell);
+//		targets.clear();
+//		findAllTargets(startCell, pathLength);
+//	}
 
 	private void findAllTargets(BoardCell startCell, int pathLength) {
-		for (BoardCell c : adjMtx.get(startCell)) {
-			if (!(visited.contains(c))) {
-				visited.add(c);
-				if (pathLength == 1) {
-					targets.add(c);
-				} else {
-					findAllTargets(c, pathLength - 1);
-				}
-				visited.remove(c);
+		Set<BoardCell> cells = new HashSet<BoardCell>();
+		cells = adjMtx.get(board[startCell.getRow()][startCell.getColumn()]);
+		for (BoardCell c : cells) {
+			if (visited.contains(board[c.getRow()][c.getColumn()]))
+			{
 			}
+			else
+			{
+				visited.add(board[c.getRow()][c.getColumn()]);
+				if (pathLength == 1) 
+				{
+						targets.add(board[c.getRow()][c.getColumn()]);
+				}
+				else if(board[c.getRow()][c.getColumn()].isDoorway())
+				{
+					targets.add(board[c.getRow()][c.getColumn()]);
+				}
+				else
+					findAllTargets(board[c.getRow()][c.getColumn()], pathLength - 1);
+				visited.remove(board[c.getRow()][c.getColumn()]);
+			}
+			
 		}
 	}
 
@@ -228,8 +268,14 @@ public class Board {
 		return adjMtx.get(board[i][j]);
 	}
 
-	public void calcTargets(int i, int j, int k) {
+	public void calcTargets(int row, int col, int steps) {
+		visited.clear();
+		targets.clear();
+		visited.add(board[row][col]);
+		findAllTargets(board[row][col], steps);
 	}
+
+	
 
 	public Set<BoardCell> getTargets() {
 		return targets;

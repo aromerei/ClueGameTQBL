@@ -14,6 +14,11 @@ public class BoardCell {
 		row = 0;
 		column = 0;
 	}
+	public BoardCell(int i, int e)
+	{
+		row = i;
+		column = e;
+	}
 
 	public BoardCell(int i, int e, char c) {
 		row = i;
