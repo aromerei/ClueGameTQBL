@@ -1,0 +1,186 @@
+commit c11c3a0c2f3c26a8e2fcb59cdf984f9e5fca4154
+Author: Tyler Quast <tylerquast@mymail.mines.edu>
+Date:   Tue Mar 7 21:35:24 2017 -0700
+
+    all tests now pass
+
+commit 68d6bb881584ad8147f436ca1d263e210040d6bc
+Author: Tyler Quast <tylerquast@mymail.mines.edu>
+Date:   Mon Mar 6 21:56:26 2017 -0700
+
+    worked on tests a little
+
+commit 3c5ffadb54d9903e401ec5a1947890f6791f8c57
+Author: Benjamin Lin <btlin@mines.edu>
+Date:   Mon Mar 6 08:40:12 2017 -0700
+
+    copied cell adjacency and target methods from experiment package
+
+commit d47f9aa36822efe8cd01b03bff04ad91612182d4
+Author: Benjamin Lin <btlin@mines.edu>
+Date:   Sat Mar 4 16:37:28 2017 -0700
+
+    expanded walkway tests
+
+commit e8f1d95e59cf5801e81d5acbda3a34bbac12fe14
+Author: Benjamin Lin <btlin@mines.edu>
+Date:   Sat Mar 4 16:14:06 2017 -0700
+
+    added walkway tests
+
+commit a16799702209aaa3cfa2a38a4d46171d8eb7658d
+Author: Benjamin Lin <btlin@mines.edu>
+Date:   Sat Mar 4 15:23:46 2017 -0700
+
+    added room exit tests
+
+commit 586569882168295041e73a26bc719ca56cb271f9
+Author: Benjamin Lin <btlin@mines.edu>
+Date:   Sat Mar 4 11:59:29 2017 -0700
+
+    fixed spelling error in boardadjtargettest class name
+
+commit 7a0af668201406c5588faf8a14a0a151215b5813
+Merge: 87ec006 3a32fca
+Author: Benjamin Lin <btlin@mines.edu>
+Date:   Thu Mar 2 12:07:29 2017 -0700
+
+    fixed merge error in boardadjtargettest
+
+commit 3a32fcaada30ba2236494578f626a031f01c826c
+Author: Tyler Quast <tylerquast@mymail.mines.edu>
+Date:   Thu Mar 2 12:05:38 2017 -0700
+
+    added test adjaencies inside room
+
+commit 87ec006c28edd0d71e4096b32ceb6074a0a6bfcd
+Author: Benjamin Lin <btlin@mines.edu>
+Date:   Thu Mar 2 12:05:30 2017 -0700
+
+    added testAdjacencyDoorways
+
+commit 0242ff0489e7bc286b927cc0391d26e152e76159
+Author: Tyler Quast <tylerquast@mymail.mines.edu>
+Date:   Thu Mar 2 11:59:55 2017 -0700
+
+    test case
+
+commit e15a9d4490747a11c6fa590107fcb430f72cf1f7
+Author: Benjamin Lin <btlin@mines.edu>
+Date:   Thu Mar 2 11:53:22 2017 -0700
+
+    added CR tests
+
+commit 3cf12ba511bd8510e7561de674c84938afce800b
+Author: Benjamin Lin <btlin@mines.edu>
+Date:   Wed Mar 1 20:47:59 2017 -0700
+
+    added error logging, added BadConfigFormatException constructor with generic message
+
+commit bc2d32dded27ff61c141fde95179c31a046fc868
+Author: Benjamin Lin <btlin@mines.edu>
+Date:   Wed Mar 1 19:57:04 2017 -0700
+
+    implemented room and layout error checking, added BadConfigFormatException error message
+
+commit a9a588c55784536b70eb8255874e36bd5ff70d6a
+Author: Benjamin Lin <btlin@mines.edu>
+Date:   Wed Mar 1 19:28:28 2017 -0700
+
+    added door detection in loadBoardConfig
+
+commit 5878fa091877dd38cb8b5f0168570c866a3e05ae
+Author: Benjamin Lin <btlin@mines.edu>
+Date:   Wed Mar 1 19:00:06 2017 -0700
+
+    implemented barebones functionality of loadBoardConfig in Board class
+
+commit 239cd62dafb8c913225226c5342cb222618a65f5
+Author: Benjamin Lin <btlin@mines.edu>
+Date:   Wed Mar 1 17:53:30 2017 -0700
+
+    implemented loadRoomConfig in Board class
+
+commit 5f34eac8ea0e14e6f831ea947877ec4e4aaf5a3f
+Author: Benjamin Lin <btlin@mines.edu>
+Date:   Wed Mar 1 16:36:28 2017 -0700
+
+    added exception tests
+
+commit 8e342942b766807d81ff2ef6ed0f84300de59d6d
+Author: Tyler Quast <tylerquast@mymail.mines.edu>
+Date:   Tue Feb 28 12:13:59 2017 -0700
+
+    Unifinished J tests
+
+commit 705a919eb1e1ac9ebd7a69732f2cde09db04ada8
+Author: Benjamin Lin <btlin@mines.edu>
+Date:   Mon Feb 27 20:51:41 2017 -0700
+
+    added log file, updated readme
+
+commit 11b31b2efd67fc5b41672afbee66b023e01aa6b4
+Author: BuildTools <unconfigured@null.spigotmc.org>
+Date:   Mon Feb 27 20:35:46 2017 -0700
+
+    fixed tests, updated calcTargets and findAllTargets to pass tests
+
+commit 240c9c522c739ab216f9a83f4918cebcda0b4245
+Author: Tyler Quast <Tyler Quast>
+Date:   Fri Feb 24 21:21:01 2017 -0700
+
+    failing tests completed
+
+commit 57faf0738828268ed3490d2bf37c685f39d7c4b2
+Author: Tyler Quast <Tyler Quast>
+Date:   Fri Feb 24 18:42:56 2017 -0700
+
+    update 3
+
+commit a98d35848acb2b8dec07e22ff32aedf6a5a9f9ef
+Author: Tyler Quast <Tyler Quast>
+Date:   Fri Feb 24 17:16:25 2017 -0700
+
+    update
+
+commit 1ce6696ef0d5f97407428cb4d951f90bfaa4b876
+Author: Tyler Quast <Tyler Quast>
+Date:   Fri Feb 24 16:18:31 2017 -0700
+
+    update
+
+commit 65482097f94cca004372479cf775f403cc82ed46
+Author: Tyler Quast <Tyler Quast>
+Date:   Fri Feb 24 15:15:38 2017 -0700
+
+    more classes
+
+commit 2d26a8de082f884d7b0b1f02faf15cbbc27105b5
+Author: Tyler Quast <Tyler Quast>
+Date:   Fri Feb 24 15:15:03 2017 -0700
+
+    more classes
+
+commit f7860dbcc29d0ff2a25c51eae18fc84196a4189b
+Author: Tyler Quast <Tyler Quast>
+Date:   Fri Feb 24 14:44:28 2017 -0700
+
+    first class
+
+commit 17b49ba3e3327fcfbdfed9d6d19c635e9ac23181
+Author: Tyler Quast <Tyler Quast>
+Date:   Fri Feb 24 14:37:58 2017 -0700
+
+    intial upload
+
+commit 50829bb3f04fe1719ff28c6f18d4fa9b82db98b3
+Author: Tyler Quast <Tyler Quast>
+Date:   Fri Feb 24 14:36:50 2017 -0700
+
+    adding files
+
+commit d378cddf7e7e0a4e19b05bb255e173599dd24cfe
+Author: tylerquast <tylerquast@mymail.mines.edu>
+Date:   Fri Feb 24 14:27:31 2017 -0700
+
+    Initial commit

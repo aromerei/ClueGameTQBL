@@ -22,8 +22,9 @@ public class TQBL_BoardAdjTargetTest {
 		board.initialize();
 	}
 
+	//Purple Border
 	@Test
-	public void testAdjacenciesInsideRooms() {// fix later
+	public void testAdjacenciesInsideRooms() {
 		// Test a corner
 		Set<BoardCell> testList = board.getAdjList(0, 0);
 		assertEquals(0, testList.size());
@@ -141,7 +142,7 @@ public class TQBL_BoardAdjTargetTest {
 		// 5 steps
 		board.calcTargets(7, 8, 5);
 		targets = board.getTargets();
-		assertEquals(27, targets.size()); //29***************
+		assertEquals(27, targets.size()); 
 		// 6 steps
 		board.calcTargets(7, 8, 6);
 		targets = board.getTargets();
